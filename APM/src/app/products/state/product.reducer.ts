@@ -4,7 +4,7 @@ import * as AppState from '../../state/app.state';
 
 // This format is for modules that are lazy loaded (see routing course to understand)
 export interface State extends AppState.State {
-  products: ProductState
+  products: ProductState;
 }
 
 export interface ProductState {
@@ -13,13 +13,13 @@ export interface ProductState {
   products: Product[];
 }
 
-export const productReducer = createReducer(
-  { showProductCode: true },
-  on(createAction('[Product] Toggle Product Code'), state => {
+export const productReducer = createReducer<ProductState>(
+  { showProductCode: true } as ProductState,
+  on(createAction('[Product] Toggle Product Code'), (state): ProductState => {
     console.log('original state: ' + JSON.stringify(state));
     return {
       ...state,
-      showProductCode: !state.showProductCode
+      showProductCode: !state.showProductCode,
     };
   })
 );
