@@ -1,6 +1,7 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { Product } from "../product";
 import * as AppState from '../../state/app.state';
+import * as ProductActions from './product.actions';
 
 // This format is for modules that are lazy loaded (see routing course to understand)
 export interface State extends AppState.State {
@@ -38,7 +39,7 @@ export const getProducts = createSelector(
 
 export const productReducer = createReducer<ProductState>(
   initialState,
-  on(createAction('[Product] Toggle Product Code'), (state): ProductState => {
+  on(ProductActions.toggleProductCode, (state): ProductState => {
     console.log('original state: ' + JSON.stringify(state));
     return {
       ...state,
