@@ -24,10 +24,25 @@ export const loadProducts = createAction(
 
 export const loadProductsSuccess = createAction(
   '[Product] Load Success',
-  props<{products: Product[] }>()
+  props<{ products: Product[] }>()
 );
 
 export const loadProductsFailure = createAction(
   '[Product] Load Failure',
   props<{ error: string }>()
+);
+
+export const updateProduct = createAction(
+  '[Product] Update Product',
+  props<{ product: Product }>()
+);
+
+export const updateProductSuccess = createAction(
+  '[Product] Update Product Success',
+  props<{ product: Product }>()
+);
+
+export const updateProductFailure = createAction(
+  '[Product] Update Product Failure',
+  props< { error: string }>()
 );
