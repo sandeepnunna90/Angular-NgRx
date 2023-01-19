@@ -2,6 +2,7 @@ import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/
 import { Product } from "../product";
 import * as AppState from '../../state/app.state';
 import * as ProductActions from './product.actions';
+import { act } from "@ngrx/effects";
 
 // This format is for modules that are lazy loaded (see routing course to understand)
 export interface State extends AppState.State {
@@ -101,5 +102,22 @@ export const productReducer = createReducer<ProductState>(
       ...state,
       error: action.error
     }
+  }),
+  on(ProductActions.updateProductSuccess, (state, action): ProductState => {
+    const updatedProducts = state.products.map(
+      item => action.product.id === item.id ? action.product : item
+    );
+    return {
+      ...state,
+      products: updatedProducts,
+      currentProductId: action.product.id,
+      error: ''
+    };
+  }),
+  on(ProductActions.updateProductFailure, (state, action): ProductState => {
+    return {
+      ...state,
+      error: action.error
+    };
   })
 );
